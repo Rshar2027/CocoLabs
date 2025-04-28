@@ -91,6 +91,18 @@ const config = {
           "0%, 100%": { opacity: 1 },
           "50%": { opacity: 0.8 },
         },
+        spin: {
+          from: { transform: "rotate(0deg)" },
+          to: { transform: "rotate(360deg)" },
+        },
+        "spin-reverse": {
+          from: { transform: "rotate(0deg)" },
+          to: { transform: "rotate(-360deg)" },
+        },
+        float: {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-10px)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -98,6 +110,13 @@ const config = {
         "fade-in": "fade-in 0.5s ease-out",
         "fade-up": "fade-up 0.5s ease-out",
         "pulse-slow": "pulse-slow 3s infinite",
+        "spin-slow": "spin 30s linear infinite",
+        "spin-medium": "spin 20s linear infinite",
+        "spin-fast": "spin 10s linear infinite",
+        "spin-reverse-slow": "spin-reverse 30s linear infinite",
+        "spin-reverse-medium": "spin-reverse 20s linear infinite",
+        "spin-reverse-fast": "spin-reverse 10s linear infinite",
+        "float-slow": "float 6s ease-in-out infinite",
       },
     },
   },

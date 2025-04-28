@@ -12,6 +12,7 @@ import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTr
 import { Checkbox } from "@/components/ui/checkbox"
 import { Label } from "@/components/ui/label"
 import { Slider } from "@/components/ui/slider"
+import { AnimatedGears, LargeGear, MediumGear } from "@/components/animated-gears"
 
 export default function ProductsPage() {
   const [priceRange, setPriceRange] = useState([0, 200])
@@ -19,195 +20,207 @@ export default function ProductsPage() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <div className="container px-4 py-8 md:px-6 md:py-12">
-        <div className="flex flex-col space-y-4 md:space-y-8">
-          <div>
-            <h1 className="text-3xl font-bold tracking-tight">Products</h1>
-            <p className="text-neutral-500 mt-2">Browse our collection of handcrafted designs.</p>
-          </div>
+      <div className="bg-gradient-black-to-white relative">
+        <AnimatedGears color="#0A192F" density="low" speed="slow" />
 
-          <div className="flex flex-col md:flex-row gap-4 md:items-center justify-between">
-            <div className="relative w-full md:w-80">
-              <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-neutral-500" />
-              <Input type="search" placeholder="Search products..." className="pl-8" />
+        {/* Fixed position decorative gears */}
+        <div className="absolute top-20 right-[5%] opacity-10 pointer-events-none hidden lg:block">
+          <LargeGear className="w-32 h-32 animate-spin-slow" color="#0A192F" />
+        </div>
+        <div className="absolute bottom-20 left-[5%] opacity-10 pointer-events-none hidden lg:block">
+          <MediumGear className="w-24 h-24 animate-spin-reverse-slow" color="#0A192F" />
+        </div>
+
+        <div className="container px-4 py-8 md:px-6 md:py-12 relative z-10">
+          <div className="flex flex-col space-y-4 md:space-y-8">
+            <div>
+              <h1 className="text-3xl font-bold tracking-tight text-theme-darkBlue">Products</h1>
+              <p className="text-neutral-500 mt-2">Browse our collection of precision-engineered designs.</p>
             </div>
 
-            <div className="flex items-center gap-2">
-              <Sheet>
-                <SheetTrigger asChild>
-                  <Button variant="outline" size="sm" className="h-9 lg:hidden">
-                    <Filter className="mr-2 h-4 w-4" />
-                    Filter
-                  </Button>
-                </SheetTrigger>
-                <SheetContent side="left">
-                  <SheetHeader>
-                    <SheetTitle>Filters</SheetTitle>
-                    <SheetDescription>Narrow down your product search.</SheetDescription>
-                  </SheetHeader>
-                  <div className="grid gap-6 py-6">
-                    <div className="space-y-4">
-                      <h3 className="text-sm font-medium">Categories</h3>
-                      <div className="grid gap-2">
-                        {categories.map((category) => (
-                          <div key={category} className="flex items-center gap-2">
-                            <Checkbox id={`category-${category}`} />
-                            <Label htmlFor={`category-${category}`} className="text-sm font-normal">
-                              {category}
-                            </Label>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                    <div className="space-y-4">
-                      <div className="flex items-center justify-between">
-                        <h3 className="text-sm font-medium">Price Range</h3>
-                        <p className="text-sm text-neutral-500">
-                          ${priceRange[0]} - ${priceRange[1]}
-                        </p>
-                      </div>
-                      <Slider
-                        defaultValue={[0, 200]}
-                        max={200}
-                        step={1}
-                        value={priceRange}
-                        onValueChange={setPriceRange}
-                      />
-                    </div>
-                    <div className="space-y-4">
-                      <h3 className="text-sm font-medium">Colors</h3>
-                      <div className="grid grid-cols-5 gap-2">
-                        {colors.map((color) => (
-                          <div key={color.name} className="flex flex-col items-center gap-1">
-                            <div
-                              className="h-8 w-8 rounded-full border border-neutral-200"
-                              style={{ backgroundColor: color.hex }}
-                            />
-                            <span className="text-xs">{color.name}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </SheetContent>
-              </Sheet>
-
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="outline" size="sm" className="h-9">
-                    Sort by: {sortOptions.find((option) => option.value === sortOption)?.label}
-                    <ChevronDown className="ml-2 h-4 w-4" />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                  {sortOptions.map((option) => (
-                    <DropdownMenuItem key={option.value} onClick={() => setSortOption(option.value)}>
-                      {option.label}
-                    </DropdownMenuItem>
-                  ))}
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-            <div className="hidden lg:block space-y-6">
-              <div className="space-y-4">
-                <h3 className="text-sm font-medium">Categories</h3>
-                <div className="grid gap-2">
-                  {categories.map((category) => (
-                    <div key={category} className="flex items-center gap-2">
-                      <Checkbox id={`desktop-category-${category}`} />
-                      <Label htmlFor={`desktop-category-${category}`} className="text-sm font-normal">
-                        {category}
-                      </Label>
-                    </div>
-                  ))}
-                </div>
+            <div className="flex flex-col md:flex-row gap-4 md:items-center justify-between">
+              <div className="relative w-full md:w-80">
+                <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-neutral-500" />
+                <Input type="search" placeholder="Search products..." className="pl-8" />
               </div>
-              <div className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <h3 className="text-sm font-medium">Price Range</h3>
-                  <p className="text-sm text-neutral-500">
-                    ${priceRange[0]} - ${priceRange[1]}
-                  </p>
-                </div>
-                <Slider defaultValue={[0, 200]} max={200} step={1} value={priceRange} onValueChange={setPriceRange} />
-              </div>
-              <div className="space-y-4">
-                <h3 className="text-sm font-medium">Colors</h3>
-                <div className="grid grid-cols-5 gap-2">
-                  {colors.map((color) => (
-                    <div key={color.name} className="flex flex-col items-center gap-1">
-                      <div
-                        className="h-8 w-8 rounded-full border border-neutral-200"
-                        style={{ backgroundColor: color.hex }}
-                      />
-                      <span className="text-xs">{color.name}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
 
-            <div className="col-span-3">
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {products.map((product) => (
-                  <Link key={product.id} href={`/products/${product.id}`} className="group">
-                    <div className="relative overflow-hidden rounded-lg">
-                      <Image
-                        src={product.image || "/placeholder.svg"}
-                        alt={product.name}
-                        width={400}
-                        height={400}
-                        className="object-cover w-full aspect-square group-hover:scale-105 transition-transform duration-300"
-                      />
-                      {product.badge && (
-                        <div className="absolute top-2 right-2 bg-black text-white text-xs font-medium px-2 py-1 rounded">
-                          {product.badge}
+              <div className="flex items-center gap-2">
+                <Sheet>
+                  <SheetTrigger asChild>
+                    <Button variant="outline" size="sm" className="h-9 lg:hidden">
+                      <Filter className="mr-2 h-4 w-4" />
+                      Filter
+                    </Button>
+                  </SheetTrigger>
+                  <SheetContent side="left">
+                    <SheetHeader>
+                      <SheetTitle>Filters</SheetTitle>
+                      <SheetDescription>Narrow down your product search.</SheetDescription>
+                    </SheetHeader>
+                    <div className="grid gap-6 py-6">
+                      <div className="space-y-4">
+                        <h3 className="text-sm font-medium">Categories</h3>
+                        <div className="grid gap-2">
+                          {categories.map((category) => (
+                            <div key={category} className="flex items-center gap-2">
+                              <Checkbox id={`category-${category}`} />
+                              <Label htmlFor={`category-${category}`} className="text-sm font-normal">
+                                {category}
+                              </Label>
+                            </div>
+                          ))}
                         </div>
-                      )}
-                    </div>
-                    <div className="mt-4 space-y-2">
-                      <div className="flex items-center">
-                        <div className="flex items-center">
-                          {Array(5)
-                            .fill(0)
-                            .map((_, i) => (
-                              <Star
-                                key={i}
-                                className={`h-4 w-4 ${
-                                  i < product.rating ? "text-yellow-400 fill-yellow-400" : "text-gray-300"
-                                }`}
+                      </div>
+                      <div className="space-y-4">
+                        <div className="flex items-center justify-between">
+                          <h3 className="text-sm font-medium">Price Range</h3>
+                          <p className="text-sm text-neutral-500">
+                            ${priceRange[0]} - ${priceRange[1]}
+                          </p>
+                        </div>
+                        <Slider
+                          defaultValue={[0, 200]}
+                          max={200}
+                          step={1}
+                          value={priceRange}
+                          onValueChange={setPriceRange}
+                        />
+                      </div>
+                      <div className="space-y-4">
+                        <h3 className="text-sm font-medium">Colors</h3>
+                        <div className="grid grid-cols-5 gap-2">
+                          {colors.map((color) => (
+                            <div key={color.name} className="flex flex-col items-center gap-1">
+                              <div
+                                className="h-8 w-8 rounded-full border border-neutral-200"
+                                style={{ backgroundColor: color.hex }}
                               />
-                            ))}
+                              <span className="text-xs">{color.name}</span>
+                            </div>
+                          ))}
                         </div>
-                        <span className="text-sm text-neutral-500 ml-2">({product.reviews})</span>
                       </div>
-                      <h3 className="font-medium text-lg">{product.name}</h3>
-                      <p className="font-medium">${product.price.toFixed(2)}</p>
                     </div>
-                  </Link>
-                ))}
+                  </SheetContent>
+                </Sheet>
+
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="outline" size="sm" className="h-9">
+                      Sort by: {sortOptions.find((option) => option.value === sortOption)?.label}
+                      <ChevronDown className="ml-2 h-4 w-4" />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end">
+                    {sortOptions.map((option) => (
+                      <DropdownMenuItem key={option.value} onClick={() => setSortOption(option.value)}>
+                        {option.label}
+                      </DropdownMenuItem>
+                    ))}
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+              <div className="hidden lg:block space-y-6">
+                <div className="space-y-4">
+                  <h3 className="text-sm font-medium">Categories</h3>
+                  <div className="grid gap-2">
+                    {categories.map((category) => (
+                      <div key={category} className="flex items-center gap-2">
+                        <Checkbox id={`desktop-category-${category}`} />
+                        <Label htmlFor={`desktop-category-${category}`} className="text-sm font-normal">
+                          {category}
+                        </Label>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <h3 className="text-sm font-medium">Price Range</h3>
+                    <p className="text-sm text-neutral-500">
+                      ${priceRange[0]} - ${priceRange[1]}
+                    </p>
+                  </div>
+                  <Slider defaultValue={[0, 200]} max={200} step={1} value={priceRange} onValueChange={setPriceRange} />
+                </div>
+                <div className="space-y-4">
+                  <h3 className="text-sm font-medium">Colors</h3>
+                  <div className="grid grid-cols-5 gap-2">
+                    {colors.map((color) => (
+                      <div key={color.name} className="flex flex-col items-center gap-1">
+                        <div
+                          className="h-8 w-8 rounded-full border border-neutral-200"
+                          style={{ backgroundColor: color.hex }}
+                        />
+                        <span className="text-xs">{color.name}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
 
-              <div className="flex justify-center mt-12">
-                <div className="flex items-center gap-2">
-                  <Button variant="outline" size="icon" disabled>
-                    <ChevronDown className="h-4 w-4 rotate-90" />
-                  </Button>
-                  <Button variant="outline" size="sm" className="h-9 w-9">
-                    1
-                  </Button>
-                  <Button variant="outline" size="sm" className="h-9 w-9">
-                    2
-                  </Button>
-                  <Button variant="outline" size="sm" className="h-9 w-9">
-                    3
-                  </Button>
-                  <Button variant="outline" size="icon">
-                    <ChevronDown className="h-4 w-4 -rotate-90" />
-                  </Button>
+              <div className="col-span-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {products.map((product) => (
+                    <Link key={product.id} href={`/products/${product.id}`} className="group">
+                      <div className="relative overflow-hidden rounded-lg">
+                        <Image
+                          src={product.image || "/placeholder.svg"}
+                          alt={product.name}
+                          width={400}
+                          height={400}
+                          className="object-cover w-full aspect-square group-hover:scale-105 transition-transform duration-300"
+                        />
+                        {product.badge && (
+                          <div className="absolute top-2 right-2 bg-black text-white text-xs font-medium px-2 py-1 rounded">
+                            {product.badge}
+                          </div>
+                        )}
+                      </div>
+                      <div className="mt-4 space-y-2">
+                        <div className="flex items-center">
+                          <div className="flex items-center">
+                            {Array(5)
+                              .fill(0)
+                              .map((_, i) => (
+                                <Star
+                                  key={i}
+                                  className={`h-4 w-4 ${
+                                    i < product.rating ? "text-yellow-400 fill-yellow-400" : "text-gray-300"
+                                  }`}
+                                />
+                              ))}
+                          </div>
+                          <span className="text-sm text-neutral-500 ml-2">({product.reviews})</span>
+                        </div>
+                        <h3 className="font-medium text-lg">{product.name}</h3>
+                        <p className="font-medium">${product.price.toFixed(2)}</p>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+
+                <div className="flex justify-center mt-12">
+                  <div className="flex items-center gap-2">
+                    <Button variant="outline" size="icon" disabled>
+                      <ChevronDown className="h-4 w-4 rotate-90" />
+                    </Button>
+                    <Button variant="outline" size="sm" className="h-9 w-9">
+                      1
+                    </Button>
+                    <Button variant="outline" size="sm" className="h-9 w-9">
+                      2
+                    </Button>
+                    <Button variant="outline" size="sm" className="h-9 w-9">
+                      3
+                    </Button>
+                    <Button variant="outline" size="icon">
+                      <ChevronDown className="h-4 w-4 -rotate-90" />
+                    </Button>
+                  </div>
                 </div>
               </div>
             </div>

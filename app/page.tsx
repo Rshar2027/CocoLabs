@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { ProductAssistant } from "@/components/product-assistant"
 import { GearPattern } from "@/components/gear-pattern"
+import { AnimatedGears, LargeGear, MediumGear, SmallGear } from "@/components/animated-gears"
 
 export default function Home() {
   return (
@@ -14,6 +15,16 @@ export default function Home() {
       {/* Hero Section - Black to White Gradient */}
       <section className="w-full py-12 md:py-24 lg:py-32 bg-gradient-black-to-white clip-path-slant relative overflow-hidden">
         <GearPattern className="text-theme-darkBlue" />
+        <AnimatedGears color="#0A192F" density="medium" speed="slow" />
+
+        {/* Fixed position decorative gears */}
+        <div className="absolute top-20 right-[5%] opacity-10 pointer-events-none hidden lg:block">
+          <LargeGear className="w-40 h-40 animate-spin-slow" color="#0A192F" />
+        </div>
+        <div className="absolute bottom-20 left-[5%] opacity-10 pointer-events-none hidden lg:block">
+          <MediumGear className="w-32 h-32 animate-spin-reverse-slow" color="#0A192F" />
+        </div>
+
         <div className="container px-4 md:px-6 relative z-10">
           <div className="grid gap-6 lg:grid-cols-2 lg:gap-12 items-center">
             <div className="flex flex-col justify-center space-y-4 animate-fade-up">
@@ -53,7 +64,7 @@ export default function Home() {
                     alt="Coco Labs Logo"
                     width={400}
                     height={400}
-                    className="w-full h-auto max-w-[400px] logo-shadow"
+                    className="w-full h-auto max-w-[400px] logo-shadow animate-float-slow"
                     priority
                   />
                 </div>
@@ -69,6 +80,16 @@ export default function Home() {
       {/* Tech Specs Section - White to Black Gradient */}
       <section className="w-full py-12 md:py-16 bg-gradient-white-to-black dark-section relative">
         <GearPattern className="text-white" />
+        <AnimatedGears color="#FFFFFF" density="low" speed="medium" />
+
+        {/* Fixed position decorative gears */}
+        <div className="absolute top-10 left-[10%] opacity-10 pointer-events-none hidden lg:block">
+          <SmallGear className="w-24 h-24 animate-spin-medium" color="#FFFFFF" />
+        </div>
+        <div className="absolute bottom-10 right-[10%] opacity-10 pointer-events-none hidden lg:block">
+          <MediumGear className="w-32 h-32 animate-spin-reverse-medium" color="#FFFFFF" />
+        </div>
+
         <div className="container px-4 md:px-6 relative z-10">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
             <div className="tech-card bg-theme-blue/50 p-6 rounded-lg border border-theme-blue backdrop-blur-sm">
@@ -101,6 +122,25 @@ export default function Home() {
       {/* Featured Products - Radial Gradient */}
       <section className="w-full py-12 md:py-24 lg:py-32 bg-gradient-radial relative">
         <GearPattern className="text-theme-darkBlue" />
+        <AnimatedGears color="#0A192F" density="medium" speed="slow" />
+
+        {/* Connected gears decoration */}
+        <div className="absolute top-1/4 right-[5%] opacity-10 pointer-events-none hidden lg:block">
+          <div className="relative">
+            <LargeGear className="w-40 h-40 animate-spin-slow" color="#0A192F" />
+            <MediumGear
+              className="w-28 h-28 animate-spin-reverse-slow absolute"
+              color="#0A192F"
+              style={{ top: "-20px", left: "80px" }}
+            />
+            <SmallGear
+              className="w-20 h-20 animate-spin-medium absolute"
+              color="#0A192F"
+              style={{ top: "40px", left: "60px" }}
+            />
+          </div>
+        </div>
+
         <div className="container px-4 md:px-6 relative z-10">
           <div className="flex flex-col items-center justify-center space-y-4 text-center">
             <div className="space-y-2">
@@ -182,6 +222,16 @@ export default function Home() {
       {/* Design Process - Diagonal Gradient */}
       <section className="w-full py-12 md:py-24 lg:py-32 bg-gradient-diagonal dark-section clip-path-slant-reverse relative">
         <GearPattern className="text-white" />
+        <AnimatedGears color="#FFFFFF" density="medium" speed="medium" />
+
+        {/* Fixed position decorative gears */}
+        <div className="absolute bottom-20 left-[15%] opacity-10 pointer-events-none hidden lg:block">
+          <LargeGear className="w-48 h-48 animate-spin-slow" color="#FFFFFF" />
+        </div>
+        <div className="absolute top-20 right-[15%] opacity-10 pointer-events-none hidden lg:block">
+          <SmallGear className="w-24 h-24 animate-spin-reverse-fast" color="#FFFFFF" />
+        </div>
+
         <div className="container px-4 md:px-6 relative z-10">
           <div className="flex flex-col items-center justify-center space-y-4 text-center">
             <div className="space-y-2">
@@ -321,8 +371,10 @@ export default function Home() {
       <div className="section-divider"></div>
 
       {/* Product Assistant - Vertical Gradient */}
-      <section className="w-full py-12 md:py-24 lg:py-32 bg-gradient-vertical">
+      <section className="w-full py-12 md:py-24 lg:py-32 bg-gradient-vertical relative">
         <GearPattern className="text-theme-darkBlue" />
+        <AnimatedGears color="#0A192F" density="low" speed="slow" />
+
         <div className="container px-4 md:px-6 relative z-10">
           <div className="flex flex-col items-center justify-center space-y-4 text-center mb-12">
             <div className="space-y-2">
@@ -342,8 +394,22 @@ export default function Home() {
       <div className="section-divider"></div>
 
       {/* Testimonials - Horizontal Gradient */}
-      <section className="w-full py-12 md:py-24 lg:py-32 bg-gradient-horizontal dark-section">
+      <section className="w-full py-12 md:py-24 lg:py-32 bg-gradient-horizontal dark-section relative">
         <GearPattern className="text-white" />
+        <AnimatedGears color="#FFFFFF" density="medium" speed="medium" />
+
+        {/* Fixed position decorative gears */}
+        <div className="absolute top-1/3 left-[5%] opacity-10 pointer-events-none hidden lg:block">
+          <div className="relative">
+            <LargeGear className="w-36 h-36 animate-spin-slow" color="#FFFFFF" />
+            <SmallGear
+              className="w-16 h-16 animate-spin-reverse-medium absolute"
+              color="#FFFFFF"
+              style={{ top: "-10px", left: "70px" }}
+            />
+          </div>
+        </div>
+
         <div className="container px-4 md:px-6 relative z-10">
           <div className="flex flex-col items-center justify-center space-y-4 text-center">
             <div className="space-y-2">
@@ -400,6 +466,13 @@ export default function Home() {
       {/* Newsletter - Conic Gradient */}
       <section className="w-full py-12 md:py-24 lg:py-32 bg-gradient-conic relative overflow-hidden">
         <GearPattern className="text-theme-darkBlue" />
+        <AnimatedGears color="#0A192F" density="low" speed="slow" />
+
+        {/* Fixed position decorative gears */}
+        <div className="absolute bottom-10 right-[10%] opacity-10 pointer-events-none hidden lg:block">
+          <MediumGear className="w-28 h-28 animate-spin-medium" color="#0A192F" />
+        </div>
+
         <div className="container px-4 md:px-6 relative z-10">
           <div className="grid gap-6 lg:grid-cols-2 lg:gap-12 items-center">
             <div>
