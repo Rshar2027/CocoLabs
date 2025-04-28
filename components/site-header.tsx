@@ -2,26 +2,17 @@
 
 import Link from "next/link"
 import Image from "next/image"
-import { ShoppingBag, Menu, X, Search, User } from "lucide-react"
+import { ShoppingBag, Menu, X, Search } from "lucide-react"
 import { useState } from "react"
-import { useSession, signOut } from "next-auth/react"
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { useCart } from "@/lib/cart-context"
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
 
 export function SiteHeader() {
   const [isSearchOpen, setIsSearchOpen] = useState(false)
   const { cart, openCart } = useCart()
-  const { data: session, status } = useSession()
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-theme-blue bg-white shadow-sm">
@@ -128,70 +119,13 @@ export function SiteHeader() {
             )}
             <span className="sr-only">Cart</span>
           </Button>
-
-          {status === "authenticated" ? (
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="icon" className="relative">
-                  {session.user.image ? (
-                    <Image
-                      src={session.user.image || "/placeholder.svg"}
-                      alt={session.user.name || "User"}
-                      width={32}
-                      height={32}
-                      className="rounded-full"
-                    />
-                  ) : (
-                    <div className="h-8 w-8 rounded-full bg-theme-darkBlue flex items-center justify-center text-white text-sm font-bold">
-                      {session.user.name?.charAt(0) || "U"}
-                    </div>
-                  )}
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                <div className="flex items-center justify-start gap-2 p-2">
-                  <div className="flex flex-col space-y-1 leading-none">
-                    {session.user.name && <p className="font-medium">{session.user.name}</p>}
-                    {session.user.email && (
-                      <p className="w-[200px] truncate text-sm text-muted-foreground">{session.user.email}</p>
-                    )}
-                  </div>
-                </div>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem asChild>
-                  <Link href="/account">Account</Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <Link href="/account?tab=orders">Orders</Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <Link href="/account?tab=wishlist">Wishlist</Link>
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem
-                  className="cursor-pointer"
-                  onSelect={(event) => {
-                    event.preventDefault()
-                    signOut({ callbackUrl: "/" })
-                  }}
-                >
-                  Sign out
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          ) : (
-            <Button
-              variant="outline"
-              size="sm"
-              asChild
-              className="hidden md:flex border-theme-orange text-theme-orange hover:bg-theme-orange hover:text-white"
-            >
-              <Link href="/auth/signin">
-                <User className="mr-2 h-4 w-4" />
-                Sign In
-              </Link>
-            </Button>
-          )}
+          <Button
+            variant="outline"
+            size="sm"
+            className="hidden md:flex border-theme-orange text-theme-orange hover:bg-theme-orange hover:text-white"
+          >
+            Sign In
+          </Button>
         </div>
       </div>
     </header>
